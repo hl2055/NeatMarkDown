@@ -1,0 +1,16 @@
+{
+  "name": "NeatMarkDown",
+  "main": "index.html",
+  "window": {
+    "toolbar": true,
+    "width": 1000,
+    "height": 618,
+    "position": "mouse",
+    "min_width": 500,
+    "min_height": 309
+  },
+  "dependencies": {
+    "codemirror": "^5.25.2",
+    "node-pandoc": "^0.3.0"
+  }
+}

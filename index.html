@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Context Menu</title>
+  <link rel="stylesheet" href="./node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="./node_modules/codemirror/theme/monokai.css">
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="./node_modules/codemirror/addon/mode/overlay.js"></script>
+  <script src="./node_modules/codemirror/mode/markdown/markdown.js"></script>
+  <script src="./node_modules/codemirror/mode/gfm/gfm.js"></script>
+  <style type="text/css">
+    .CodeMirror {
+      border: 1px solid #eee;
+      width: auto;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<form>
+<textarea id='codemirror'>
+# Title
+
+Here is a *short document* including Markdown and Math, here is the equation:
+
+Inline math $f(x)=x^2$
+
+$$
+F(x,y)=0 ~~\mbox{and}~~
+\left| \begin{array}{ccc}
+  F''_{xx} & F''_{xy} &  F'_x \\
+  F''_{yx} & F''_{yy} &  F'_y \\
+  F'_x     & F'_y     & 0 
+  \end{array}\right| = 0
+$$
+
+___
+
+Proof: ... 
+
+This is **bold**.
+
+## Write some code:
+
+### Python code
+
+```python
+def python_code():
+    return 42
+```
+
+
+### JS code
+```js
+$(document).find('div.has-feedback').addClass('has-success');
+var poop = Poop();
+var lambda_func = function() {
+  return {
+    'k1': 'v1',
+    'k2': 'v2'
+  }
+}
+```
+
+</textarea>
+<input type='button' id="convert-btn" value="convert" onclick='convert();open_pdf();'></input>
+<p id='debug-msg'></p>
+</form>
+<script>
+var fs = require('fs');
+var pandoc = require('node-pandoc');
+var gui = require('nw.gui');
+var gui_window = gui.Window.get();
+
+var tmp_dir = '/tmp/nmd';
+mkdir(tmp_dir)
+
+var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
+  mode: 'markdown',
+  lineNumbers: true,
+  theme: "monokai",
+  extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+});
+
+function save_file(){}
+
+function load_file() {}
+
+function convert() {
+  // flush(process.cwd());
+  pandoc(editor.getValue(), ['-o', tmp_dir + '/export.pdf'], function(err, result){
+  });
+}
+
+function open_pdf() {
+  var pdf_width = 800
+  gui.Window.open('file://'+ tmp_dir +'/export.pdf',{
+    position: 'center',
+    width: pdf_width,
+    height: pdf_width * 1.62
+  });
+}
+
+function flush(msg) {  // simple debugging walk-around
+  document.querySelector('#debug-msg').innerHTML = msg;
+}
+
+function mkdir(dir) {
+  if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+  }
+}
+
+$(function(){
+  $(".CodeMirror").css('font-size',"12pt");
+
+  $(".CodeMirror").height(gui_window.window.innerHeight - 42 - $('#convert-btn').height());
+
+  gui_window.on('resize', function(w, h){
+    // var new_width = $(window).width();
+    // var new_height = $(window).height();      
+    $(".CodeMirror").height(h - 42 - $('#convert-btn').height());
+});
+})
+</script>  
+</body>
+</html>
