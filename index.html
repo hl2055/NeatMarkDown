@@ -72,9 +72,9 @@ var fs = require('fs');
 var pandoc = require('node-pandoc');
 var gui = require('nw.gui');
 var gui_window = gui.Window.get();
-
 var tmp_dir = '/tmp/nmd';
-mkdir(tmp_dir)
+mkdir(tmp_dir);
+var filepath =tmp_dir + '/export.pdf';
 
 var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
   mode: 'markdown',
@@ -88,15 +88,16 @@ function save_file(){}
 function load_file() {}
 
 function convert() {
-  // flush(process.cwd());
-  pandoc(editor.getValue(), ['-o', tmp_dir + '/export.pdf'], function(err, result){
-    open_pdf();
-  });
+  fs.unlink(filepath, function(){
+    pandoc(editor.getValue(), ['-o', filepath], function(err, result){
+      open_pdf();
+    });
+  }) 
 }
 
 function open_pdf() {
   var pdf_width = 800
-  gui.Window.open('file://'+ tmp_dir +'/export.pdf',{
+  gui.Window.open('file://'+ filepath,{
     position: 'center',
     width: pdf_width,
     height: pdf_width * 1.62
