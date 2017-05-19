@@ -64,7 +64,7 @@ var lambda_func = function() {
 ```
 
 </textarea>
-<input type='button' id="convert-btn" value="convert" onclick='convert();open_pdf();'></input>
+<input type='button' id="convert-btn" value="convert" onclick='convert();'></input>
 <p id='debug-msg'></p>
 </form>
 <script>
@@ -90,6 +90,7 @@ function load_file() {}
 function convert() {
   // flush(process.cwd());
   pandoc(editor.getValue(), ['-o', tmp_dir + '/export.pdf'], function(err, result){
+    open_pdf();
   });
 }
 
