@@ -21,4 +21,19 @@ $$
 e^{\pi i} - 1 = 0
 $$
 
+
+and
+
+```
+\`\`\`python
+def python_func(*arg, **kw):
+	return lambda x: x(*arg, **kw)
+\`\`\`
+```
+
+```python
+def python_func(*arg, **kw):
+	return lambda x: x(*arg, **kw)
+```
+
 **ez...man...E...Z...**
