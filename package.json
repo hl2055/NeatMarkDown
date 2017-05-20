@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "codemirror": "^5.25.2",
-    "node-pandoc": "^0.3.0"
+    "node-pandoc": "^0.3.0",
+    "jquery": "*",
+    "codemirror": "*"
   }
 }
