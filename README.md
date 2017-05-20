@@ -3,7 +3,12 @@ Markdown editor that supports MathJax math styling.
 
 Inspired by annoyingly redundent code and math styling with Latex in college assignments. We're not writing a book, we just want more sleep.
 
-Developed with [NW.js](nwjs.io), [node-pandoc](https://www.npmjs.com/package/node-pandoc), [codemirror](codemirror.net) and Macbook. 
+Developed with [NW.js](http://nwjs.io), [node-pandoc](https://www.npmjs.com/package/node-pandoc), [codemirror](http://codemirror.net) and Macbook. 
+
+You'll also need [pandoc](http://pandoc.org) and [Latex](https://www.latex-project.org/) to make it work.
+
+Please consult [http://docs.nwjs.io/en/latest/](http://docs.nwjs.io/en/latest/) for how to run nwjs applet.
+---
 
 ```
 $$
@@ -16,4 +21,4 @@ $$
 e^{\pi i} - 1 = 0
 $$
 
-**ez...**
+**ez...man...E...Z...**
