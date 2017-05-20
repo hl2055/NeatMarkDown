@@ -74,7 +74,11 @@ var gui = require('nw.gui');
 var gui_window = gui.Window.get();
 var tmp_dir = '/tmp/nmd';
 mkdir(tmp_dir);
-var filepath =tmp_dir + '/export.pdf';
+var filepath = tmp_dir + '/export.pdf';
+
+// add path to pandoc
+process.env.PATH = process.env.PATH + ':/usr/local/bin:/Library/TeX/texbin/';
+
 
 var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
   mode: 'markdown',
@@ -90,6 +94,7 @@ function load_file() {}
 function convert() {
   fs.unlink(filepath, function(){
     pandoc(editor.getValue(), ['-o', filepath], function(err, result){
+      flush(process.env.PATH);
       open_pdf();
     });
   }) 
@@ -119,9 +124,7 @@ $(function(){
 
   $(".CodeMirror").height(gui_window.window.innerHeight - 42 - $('#convert-btn').height());
 
-  gui_window.on('resize', function(w, h){
-    // var new_width = $(window).width();
-    // var new_height = $(window).height();      
+  gui_window.on('resize', function(w, h){   
     $(".CodeMirror").height(h - 42 - $('#convert-btn').height());
 });
 })
