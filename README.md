@@ -24,12 +24,13 @@ $$
 
 and
 
-```
-\`\`\`python
+
+````
+```python
 def python_func(*arg, **kw):
 	return lambda x: x(*arg, **kw)
-\`\`\`
 ```
+````
 
 ```python
 def python_func(*arg, **kw):
