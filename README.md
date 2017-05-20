@@ -12,13 +12,13 @@ Please consult [http://docs.nwjs.io/en/latest/](http://docs.nwjs.io/en/latest/) 
 
 ```
 $$
-e^{\pi i} - 1 = 0
+e^{\pi i} + 1 = 0
 $$
 ```
 will look like
 
 $$
-e^{\pi i} - 1 = 0
+e^{\pi i} + 1 = 0
 $$
 
 
